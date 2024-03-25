@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="Automatic_Or_Manual" Id="{eb7c2b8b-a0a7-45e5-82a9-2d4c86ed9423}" SpecialFunc="None">
+    <Declaration><![CDATA[PROGRAM Automatic_Or_Manual
+VAR_INPUT
+	Automatic_Or_Manual:BOOL;
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF Automatic_Or_Manual THEN
+	Automatic();
+ELSE
+	Manual();
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="Automatic_Or_Manual">
+      <LineId Id="5" Count="0" />
+      <LineId Id="7" Count="0" />
+      <LineId Id="9" Count="1" />
+      <LineId Id="8" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

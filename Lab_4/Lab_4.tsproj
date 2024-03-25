@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<TcSmProject xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://www.beckhoff.com/schemas/2012/07/TcSmProject" TcSmVersion="1.0" TcVersion="3.1.4024.53">
+	<Project ProjectGUID="{95EFB0AA-A775-48E7-9D7E-CEA5701013DC}" TargetNetId="192.168.4.1.1.1" Target64Bit="true" ShowHideConfigurations="#x3c7">
+		<System>
+			<Tasks>
+				<Task Id="3" Priority="20" CycleTime="100000" AmsPort="350" AdtTasks="true">
+					<Name>PlcTask</Name>
+				</Task>
+				<Task Id="4" Priority="21" CycleTime="100000" AmsPort="351" AdtTasks="true">
+					<Name>PlcTask1</Name>
+				</Task>
+			</Tasks>
+		</System>
+		<Plc>
+			<Project GUID="{530A9AAD-07AC-4B7B-969E-740416B3307E}" Name="PLCSim" PrjFilePath="PLCSim\PLCSim.plcproj" TmcFilePath="PLCSim\PLCSim.tmc" ReloadTmc="true" AmsPort="851" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502000" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLCSim\PLCSim.tmc" TmcHash="{DBF3AF48-DBC0-1E08-410A-4F79A0D2B422}">
+					<Name>PLCSim Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Vars VarGrpType="1">
+						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>GVL.ixGotoPosB</Name>
+							<Comment><![CDATA[Input to from Operator]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.ixGotoPosA</Name>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" AreaNo="1">
+						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>GVL.qxTram</Name>
+							<Comment><![CDATA[Output from process]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.qxA</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.qxB</Name>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
+					<Contexts>
+						<Context>
+							<Id>0</Id>
+							<Name>PlcTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010030</OTCID>
+							</ManualConfig>
+							<Priority>20</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="20" OTCID="#x08502001"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+			<Project GUID="{BD52CCD5-71CD-4758-B79A-54E9C489820C}" Name="PLCStudent" PrjFilePath="PLCStudent\PLCStudent.plcproj" TmcFilePath="PLCStudent\PLCStudent.tmc" ReloadTmc="true" AmsPort="852" FileArchiveSettings="#x000e" SymbolicMapping="true">
+				<Instance Id="#x08502040" TcSmClass="TComPlcObjDef" KeepUnrestoredLinks="2" TmcPath="PLCStudent\PLCStudent.tmc" TmcHash="{60F1F648-F2F4-FD65-B713-EBECE574F1AD}">
+					<Name>PLCStudent Instance</Name>
+					<CLSID ClassFactory="TcPlc30">{08500001-0000-0000-F000-000000000064}</CLSID>
+					<Vars VarGrpType="1">
+						<Name>PlcTask Inputs</Name>
+						<Var>
+							<Name>GVL.ixTram</Name>
+							<Comment><![CDATA[Output from process]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.ixA</Name>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.ixB</Name>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
+					<Vars VarGrpType="2" AreaNo="1">
+						<Name>PlcTask Outputs</Name>
+						<Var>
+							<Name>GVL.qxGotoPosB</Name>
+							<Comment><![CDATA[Input to from Operator]]></Comment>
+							<Type>BOOL</Type>
+						</Var>
+						<Var>
+							<Name>GVL.qxGotoPosA</Name>
+							<Type>BOOL</Type>
+						</Var>
+					</Vars>
+					<Contexts>
+						<Context>
+							<Id>0</Id>
+							<Name>PlcTask</Name>
+							<ManualConfig>
+								<OTCID>#x02010040</OTCID>
+							</ManualConfig>
+							<Priority>21</Priority>
+							<CycleTime>10000000</CycleTime>
+						</Context>
+					</Contexts>
+					<TaskPouOids>
+						<TaskPouOid Prio="21" OTCID="#x08502041"/>
+					</TaskPouOids>
+				</Instance>
+			</Project>
+		</Plc>
+		<Io/>
+	</Project>
+	<Mappings>
+		<MappingInfo Identifier="{08502001-2041-0850-0020-500840205008}" Id="#x02030010" Watchdog="04000000040000000400000004000000"/>
+		<OwnerA Name="TIPC^PLCSim^PLCSim Instance">
+			<OwnerB Name="TIPC^PLCStudent^PLCStudent Instance">
+				<Link VarA="PlcTask Inputs^GVL.ixGotoPosA" VarB="PlcTask Outputs^GVL.qxGotoPosA"/>
+				<Link VarA="PlcTask Inputs^GVL.ixGotoPosB" VarB="PlcTask Outputs^GVL.qxGotoPosB"/>
+				<Link VarA="PlcTask Outputs^GVL.qxA" VarB="PlcTask Inputs^GVL.ixA"/>
+				<Link VarA="PlcTask Outputs^GVL.qxB" VarB="PlcTask Inputs^GVL.ixB"/>
+				<Link VarA="PlcTask Outputs^GVL.qxTram" VarB="PlcTask Inputs^GVL.ixTram"/>
+			</OwnerB>
+		</OwnerA>
+	</Mappings>
+</TcSmProject>

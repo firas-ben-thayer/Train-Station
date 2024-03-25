@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <POU Name="Process" Id="{2fccb5d1-ce4a-47a7-bc58-2a6f5bfd27d0}" SpecialFunc="None">
+    <Declaration><![CDATA[FUNCTION_BLOCK Process
+VAR_INPUT
+	ixInc:BOOL;
+	ixDec:BOOL;
+END_VAR
+VAR_OUTPUT
+	qxCurrentPos:INT;
+	qxPosA:BOOL;
+	qxPosB:BOOL;
+END_VAR
+VAR
+END_VAR
+]]></Declaration>
+    <Implementation>
+      <ST><![CDATA[IF ixInc AND qxCurrentPos<486 THEN
+	qxCurrentPos:= qxCurrentPos + 1;
+ELSIF ixDec AND qxCurrentPos>0 THEN
+	qxCurrentPos:= qxCurrentPos - 1;
+END_IF
+
+IF qxCurrentPos = 486 THEN
+	qxPosB:= TRUE;
+ELSIF qxCurrentPos = 0 THEN
+	qxPosA:= TRUE;
+ELSE
+	qxPosB:= FALSE;
+	qxPosA:= FALSE;
+END_IF]]></ST>
+    </Implementation>
+    <LineIds Name="Process">
+      <LineId Id="9" Count="0" />
+      <LineId Id="15" Count="0" />
+      <LineId Id="18" Count="1" />
+      <LineId Id="17" Count="0" />
+      <LineId Id="25" Count="0" />
+      <LineId Id="24" Count="0" />
+      <LineId Id="26" Count="1" />
+      <LineId Id="31" Count="3" />
+      <LineId Id="28" Count="0" />
+    </LineIds>
+  </POU>
+</TcPlcObject>

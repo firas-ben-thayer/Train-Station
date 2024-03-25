@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<TcPlcObject Version="1.1.0.1" ProductVersion="3.1.4024.12">
+  <GVL Name="GVL" Id="{6200a9a3-9a45-43de-a335-c3e376e6e090}">
+    <Declaration><![CDATA[{attribute 'qualified_only'}
+VAR_GLOBAL
+	//Output from process
+	qxTram	AT %Q*: BOOL;
+	qxA		AT %Q*: BOOL;
+	qxB		AT %Q*: BOOL;
+	
+	//Input to from Operator
+	ixGotoPosB AT %I*: BOOL;
+	ixGotoPosA AT %I*: BOOL;
+	//icStop AT %I*: BOOL;
+	//ixEmergency AT %I*: BOOL;
+END_VAR]]></Declaration>
+  </GVL>
+</TcPlcObject>
